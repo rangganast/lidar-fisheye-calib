@@ -189,9 +189,9 @@ experiment = Experiment(
 
 
 ## Contacts
-Miftahul Umam
+Rangga Aziz
 
 Email:
-miftahul.umam14@gmail.com
+rangganast@gmail.com
 
 ## Acknowledgments
