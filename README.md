@@ -57,21 +57,25 @@ The network uses RGB images and depth images from 2D projections of LiDAR point 
 Depth images are created by projecting LiDAR point to image plane using [Mei and Rives camera model](https://ieeexplore.ieee.org/document/4209702). Here are some steps:
 
 * Project 3D world points in the mirror frame onto a unit sphere.
+
 $$
 \mathbf{(\chi)_F}_m \rightarrow \mathbf{(\chi_s)_F}_m = \frac{\chi}{\|\chi\|} = (X_s, Y_s, Z_s)
 $$
 
 * Points are transformed to a new reference frame based on the center of the new frame.
+
 $$
 C_p = (0,0,\xi),\mathbf{(\chi_s)_F}_m \rightarrow \mathbf{(\chi_s)_F}_p = (X_s, Y_s, Z_s + \xi)
 $$
 
-\item Project the point onto a normalized coordinate system.
+* Project the point onto a normalized coordinate system.
+
 $$
 m = \left( \frac{X_s}{Z_s + \xi}, \frac{Y_s}{Z_s + \xi}, 1 \right) = \hbar(\chi_s)
 $$
 
-\item The final projection matrix incorporates the camera's intrinsic parameters.
+* The final projection matrix incorporates the camera's intrinsic parameters.
+
 $$
 p = K m =
 \begin{bmatrix}
