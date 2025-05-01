@@ -93,100 +93,39 @@ where $f_x$, $f_y$, $c_x$, and $c_y$ are the intrinsic parameters of the camera.
 |:--:| 
 | *Architecture of the Extrinsic Calibration Deep Network* |
 
-The model consists of two branches of feature extraction, each for RGB image and LiDAR depth image. 
-The two branches use the same architecture of [EfficientNetV2](https://arxiv.org/abs/2104.00298) without the fully-connected layers 
-and different input channel for each branch (3 channels for RGB and 1 channel for depth).
-
-The resulting feature maps from both branches is the concatenated and are processed in the feature matching network.
-The feature matching network leverages CSA transformer from [Lite Vision Transformer](https://arxiv.org/abs/2112.10809)
-to find corresponding features from both modalities.
-
-The feature mathcing result is then fed to the fully connected layers where $1 \times 3$ translation vectors and
-$1 \times 4$ rotation vectors (in quaternions) are predicted.
+TBA
 
 #### Loss Functions
 A Three loss functions are employed for the model training. The combined loss function are expressed as follows:
 
 $$
-L = \lambda_1 L_{trans} + \lambda_2 L_{rot} + \lambda_3 L_{\text{PCD}},
+L = \lambda_1 L_{trans} + \lambda_2 L_{rot},
 $$
 
-where $\lambda_1$, $\lambda_2$, and $\lambda_3$ are the weights for each loss term.
+where $\lambda_1$ and $\lambda_2$ are the weights for each loss term.
 Each loss function term is expressed as below:
 
 * Translation Loss
 
-$$
-L_{trans}(t_{pred}, t_{gt}) = \frac{1}{n} \sum_{i}^{n} \text{smoothL1}(t_{pred\ i} - t_{gt\ i}),
-$$
-
-$$
-\text{smoothL1}(x) =
-\begin{cases} 
-\frac{1}{2} x^2, & \text{if } |x| < 1 \\
-|x| - \frac{1}{2}, & \text{otherwise}
-\end{cases}
-$$
+TBA
 
 * Rotation Loss (Quaternion Distance)
 
-$$
-L_{rot}(q_{pred}, q_{gt}) = D_a(q_{gt} * \text{inv}(q_{pred})),
-$$
-
-$$
-D_a(m) = \text{atan2}\left(\sqrt{b^2_m + c^2_m + d^2_m}, \, |a_m|\right),
-$$
-
-* Point Cloud Distance Loss (Chamfer Distance)
-
-$$
-L_{\text{PCD}}(P_{pred}, P_{gt}) = \sum_{x \in P_{pred}} \min_{y \in P_{gt}} \| x - y \|^2 + \sum_{y \in P_{gt}} \min_{x \in P_{pred}} \| y - x \|^2
-$$
-
-where $P_{pred}$ and $P_{gt}$ are the ground truth point cloud data and point cloud data calibrated with predicted extrinsic parameters, respectively.
+TBA
 
 ## Getting Started
 ### Requirements
-First, download [KITTI Odometry dataset](https://www.cvlibs.net/datasets/kitti/eval_odometry.php) on your setup.
-After downloading the dataset, modify the path to the dataset in the training file (`train_with_cometml.py` or `train.py`)
-and the testing file (`test_continuous.py` or `test_iterative.py`):
-```
-DATASET_FILEPATH = "/path/to/kitti/odometry/dataset"
-```
-
-This project was developed on an environment consisting of:
-* Python 3.10.12
-* NVIDIA RTX 3090Ti GPU with CUDA v11.8 and CuDNN v11.8
-* Install dependencies using the syntax below:
-```
-pip install -r requirements.txt
-```
+TBA
 
 ### Training
-To train without using Comet ML, run this on your terminal:
-```
-python train.py
-```
-To train using Comet ML, run:
-```
-python train_with_cometml.py
-```
-Before using `train_with_cometml.py`, modify these lines:
-```
-experiment = Experiment(
-    api_key = YOUR_COMETML_API, # modify to your COMET ML API
-    project_name = "your_project_name", # modify to your project name
-    workspace = "your_workspace_name", # modify to your workspace name
-    ...
-)
+TBA
 ```
 
 ### Evaluation
-
+TBA
 
 ## Current Result
-
+TBA
 
 ## Contacts
 Rangga Aziz
